@@ -16,7 +16,7 @@ rspec
 # Run the server (better to do this in a separate terminal).
 rackup
 ```
-Modification 1 (Tim)
+Mod 1 (Tim)
 Mod 2 (Tom)
-
-Mod3
+Mod 3 (Alastair)
+Mod 4 (Adon)
