@@ -17,4 +17,9 @@ class Application < Sinatra::Base
 
     return erb(:index)
   end
+
+  get '/booking/new' do 
+    
+  return erb(:new_booking)
+  end 
 end
