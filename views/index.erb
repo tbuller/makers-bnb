@@ -2,14 +2,20 @@
 <html>
     <head>
         <title>MakersBnB</title>
-
-        <!--
-            Head to https://github.com/makersacademy/web-applications/blob/main/pills/loading_css_or_static_files.md
-            If you're wondering how the CSS file below is being loaded.
-        -->
+         
+        
         <link rel="stylesheet" href="/style.css" >
     </head>
     <body>
-        <p>This is the homepage.</h1>
+        <div><h1> Makersbnb </h1></div>
+        <div><h2> Listings near you </h2>
+        <% @listings.each do |listing| %>
+        <div>
+        <h3><%= listing.name %></h3>
+        <%= "#{listing.city}, #{listing.country}. Price: #{listing.ppn}" %>
+        </div>
+        <% end %>
+        </div>
+
     </body>
 </html>
