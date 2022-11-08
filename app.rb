@@ -1,5 +1,9 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
+require_relative './lib/listing_repo'
+require_relative './lib/database_connection'
+
+DatabaseConnection.connect
 
 class Application < Sinatra::Base
   configure :development do
@@ -7,6 +11,10 @@ class Application < Sinatra::Base
   end
 
   get '/' do
+    repo = ListingRepository.new
+
+    @listings = repo.all
+
     return erb(:index)
   end
 end
