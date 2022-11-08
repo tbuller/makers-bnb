@@ -17,10 +17,15 @@ class Application < Sinatra::Base
 
     return erb(:index)
   end
-
+  
   get '/listing/:id' do
     repo = ListingRepository.new
     @listing = repo.find(params[:id])
     return erb(:listing)
   end
+
+  get '/booking/new' do 
+  return erb(:new_booking)
+  end 
+  
 end
