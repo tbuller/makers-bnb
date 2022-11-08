@@ -38,4 +38,20 @@ describe ListingRepository do
       expect(listing.city).to eq('New York')
     end
   end
+
+  it 'creates new listing' do
+    listing = Listing.new
+    listing.name = 'Santorini escape'
+    listing.address = '52 Italy Street'
+    listing.city = 'Sao Paolo'
+    listing.country = 'Mexico'
+    listing.ppn = '$1,000.00'
+    listing.description = 'As advertised'
+    listing.host_id = 3
+    repo = ListingRepository.new
+    repo.create(listing)
+    expect(listing.address).to eq('52 Italy Street')
+    expect(listing.city).to eq('Sao Paolo')
+    expect(listing.country).to eq('Mexico')
+  end
 end

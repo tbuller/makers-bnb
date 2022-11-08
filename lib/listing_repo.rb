@@ -39,8 +39,11 @@ class ListingRepository
 
       return listing
     end
+  end
 
-    
+  def create(listing)
+    sql = 'INSERT INTO listings (name, address, city, country, ppn, description, host_id) VALUES ($1, $2, $3, $4, $5, $6, $7);'
+    DatabaseConnection.exec_params(sql, [listing.name, listing.address, listing.city, listing.country, listing.ppn, listing.description, listing.host_id])
   end
 
 end
