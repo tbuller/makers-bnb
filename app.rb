@@ -17,4 +17,10 @@ class Application < Sinatra::Base
 
     return erb(:index)
   end
+
+  get '/listing/:id' do
+    repo = ListingRepository.new
+    @listing = repo.find(params[:id])
+    return erb(:listing)
+  end
 end
