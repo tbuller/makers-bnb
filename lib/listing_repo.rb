@@ -47,7 +47,7 @@ class ListingRepository
   end
 
   def find_bookings(listing_id)
-    sql = 'SELECT listings.id AS listing_id, name, address, city, country, ppn, description, host_id, available_start, available_end, bookings.id AS booking_id, date, user_id AS customer_id FROM listings
+    sql = 'SELECT listings.id AS listing_id, name, address, city, country, ppn, description, host_id, available_start, available_end, bookings.id AS booking_id, date, user_id AS customer_id, approved FROM listings
     JOIN bookings ON listing_id = listings.id
     WHERE listings.id = $1;'
 
