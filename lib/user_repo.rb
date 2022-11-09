@@ -1,4 +1,7 @@
 require_relative 'user'
+require_relative 'bookings'
+require_relative 'bookings_repository'
+require_relative 'listing_repo'
 
 class UserRepository
   def all
@@ -67,6 +70,19 @@ class UserRepository
       user.listings << listing
     end
     return user
+  end
+
+  def find_bookings(host_id)
+    host = find_listings(host_id)
+    listings = host.listings
+
+    listing_repo = ListingRepository.new
+    listings.each do |listing|
+     listing = listing_repo.find_bookings(listing.id)
+     host.bookings << listing.bookings
+    end
+      host.bookings = host.bookings.flatten
+    return host
   end
 
   def create(user)

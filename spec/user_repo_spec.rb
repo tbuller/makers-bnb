@@ -74,4 +74,12 @@ describe UserRepository do
     expect(user.listings.last.country).to eq('Germany')
   end
 
+  it 'finds bookings for user ID 2' do
+    repo = UserRepository.new
+    user = repo.find_bookings(2)
+    expect(user.bookings.length).to eq(2)
+    expect(user.bookings.first.id).to eq(2)
+    expect(user.bookings.last.date).to eq('2022-12-25')
+  end
+
 end
