@@ -20,6 +20,12 @@ class Application < Sinatra::Base
 
     return erb(:index)
   end
+  
+  get '/listing/:id' do
+    repo = ListingRepository.new
+    @listing = repo.find(params[:id])
+    return erb(:listing)
+  end
 
   get '/login' do
     return erb(:login)
@@ -43,4 +49,20 @@ class Application < Sinatra::Base
       redirect '/login'
     end
   end  
+
+  get '/booking/new' do 
+    return erb(:new_booking)
+  end 
+
+  post '/booking' do 
+    booking = Booking.new
+    
+    booking.date = params[:date]
+    booking.user_id = params[:user_id]
+    booking.listing_id = params[:listing_id]
+
+    repo = BookingRepository.new 
+    repo.create(booking)
+  end 
+  
 end

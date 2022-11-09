@@ -28,14 +28,14 @@ class ListingRepository
 
     result_set.each do |record|
       listing = Listing.new
-      listing.id = record['id']
+      listing.id = record['id'].to_i
       listing.name = record['name']
       listing.address = record['address']
       listing.city = record['city']
       listing.country = record['country']
       listing.ppn = record['ppn']
       listing.description = record['description']
-      listing.host_id = record['host_id']
+      listing.host_id = record['host_id'].to_i
 
       return listing
     end
