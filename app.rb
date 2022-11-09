@@ -26,6 +26,25 @@ class Application < Sinatra::Base
    return erb(:new_listing)
   end 
 
+  post '/listing' do
+    listing = Listing.new
+
+    listing.name = params[:name]
+    listing.address = params[:address]
+    listing.city = params[:city]
+    listing.country = params[:country]
+    listing.ppn = params[:ppn]
+    listing.description = params[:description]
+    listing.host_id = params[:host_id].to_i
+    listing.available_start = params[:available_start]
+    listing.available_end = params[:available_end]
+
+    repo = ListingRepository.new
+    repo.create(listing)
+
+    redirect '/'
+  end
+
   get '/listing/:id' do
     repo = ListingRepository.new
     @listing = repo.find(params[:id])

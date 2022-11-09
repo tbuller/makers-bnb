@@ -101,4 +101,16 @@ describe Application do
       expect(response.status).to eq 200 
     end 
   end
+
+  context 'POST /listing/' do
+    it 'creates a listing' do
+      response = post('/listing', name: 'Property A', address: '12 Arroyo Lane', city: 'London', country: 'UK', ppn: '$120.00', description: 'nice place tbh', host_id: 2, available_start: '2022-11-20', available_end: '2022-12-31')
+      repo = ListingRepository.new
+      listings = repo.all
+      
+      #expect(response.status).to eq 302
+      expect(listings.length).to eq 7
+
+    end
+  end    
 end
