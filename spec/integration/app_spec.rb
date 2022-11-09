@@ -93,4 +93,12 @@ describe Application do
       expect(users.last.name).to eq 'Tim'
     end
   end    
+  
+  context 'GET /listing/new' do 
+    it 'loads a form to create a new lisitng' do 
+      response = get('/listing/new')
+
+      expect(response.status).to eq 200 
+    end 
+  end
 end
