@@ -3,6 +3,7 @@ require 'sinatra/reloader'
 require_relative './lib/listing_repo'
 require_relative './lib/database_connection'
 require_relative './lib/user_repo'
+require_relative './lib/bookings_repository'
 
 DatabaseConnection.connect
 
@@ -24,6 +25,7 @@ class Application < Sinatra::Base
   get '/listing/:id' do
     repo = ListingRepository.new
     @listing = repo.find(params[:id])
+    session[:listing_id] = @listing.id
     return erb(:listing)
   end
 
@@ -37,7 +39,8 @@ class Application < Sinatra::Base
     outcome = repo.all
 
     user = repo.find_by_email(params[:email])
-    if outcome.include?(user)
+
+    if outcome.to_s.include?(user.email)
       user_password = user.password
       if repo.valid_password?(user_password, params[:password]) == "success"
         session[:user_id] = user.id
@@ -58,8 +61,8 @@ class Application < Sinatra::Base
     booking = Booking.new
     
     booking.date = params[:date]
-    booking.user_id = params[:user_id]
-    booking.listing_id = params[:listing_id]
+    booking.user_id = session[:user_id] ||= params[:user_id]
+    booking.listing_id = session[:listing_id] ||= params[:listing_id]
 
     repo = BookingRepository.new 
     repo.create(booking)

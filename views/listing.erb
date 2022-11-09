@@ -11,7 +11,6 @@
 <body>
 
 <div class="listing-card">
-
   <div>
   <h1> <%= @listing.name %> </h1>
   </div>
@@ -27,6 +26,9 @@
   <div>
   <%= @listing.description %>
   </div>
+  <form method="POST" action="/booking">
+  <input type="date" name="date">
+  <input type="submit" value="Book">
 
 </div>
   
