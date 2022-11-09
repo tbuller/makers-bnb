@@ -76,11 +76,12 @@ class Application < Sinatra::Base
     user.username = params[:username]
     user.email = params[:email]
     user.password = params[:password]
+    p user
 
     repo = UserRepository.new
     repo.create(user)
 
-    redirect '/login' #logic in here so that the button being clicked redirects
+    redirect '/login'
   end  
 
   
