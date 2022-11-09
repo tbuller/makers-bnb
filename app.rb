@@ -76,7 +76,6 @@ class Application < Sinatra::Base
     user.username = params[:username]
     user.email = params[:email]
     user.password = params[:password]
-    p user
 
     repo = UserRepository.new
     repo.create(user)
