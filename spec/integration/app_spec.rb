@@ -73,4 +73,12 @@ describe Application do
       expect(bookings.last.listing_id).to eq(1)
     end 
   end
+
+  context 'GET /signup' do
+    it 'redirects the user to the sign up page' do
+      reponse = get('/signup')
+
+      expect(response.status).to eq 302
+    end
+  end    
 end

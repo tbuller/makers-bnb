@@ -64,5 +64,24 @@ class Application < Sinatra::Base
     repo = BookingRepository.new 
     repo.create(booking)
   end 
+
+  get '/signup/new' do
+    return erb(:signup)
+  end
+  
+  post '/signup' do
+    user = User.new
+
+    user.name = params[:name]
+    user.username = params[:username]
+    user.email = params[:email]
+    user.password = params[:password]
+
+    repo = UserRepository.new
+    repo.create(user)
+
+    redirect '/login' #logic in here so that the button being clicked redirects
+  end  
+
   
 end
