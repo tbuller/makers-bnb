@@ -1,4 +1,4 @@
-require 'user'
+require_relative 'user'
 
 class UserRepository
   def all
@@ -44,4 +44,29 @@ class UserRepository
     
     return user
   end
+
+  def find_by_email(email)
+    sql = 'SELECT * FROM users WHERE email = $1;'
+    result_set = DatabaseConnection.exec_params(sql, [email])
+
+    result_set.each do |record|
+      user = User.new
+      user.id = record['id'].to_i
+      user.name = record['name']
+      user.username = record['username']
+      user.email = record['email']
+      user.password = record['password']
+
+      return user
+    end
+  end  
+
+  def valid_password?(password, submitted_password)
+    
+    if password == submitted_password
+      return "success"
+    else
+      return "failure"  
+    end  
+  end  
 end

@@ -5,7 +5,6 @@ require "rack/test"
 require_relative '../../app'
 require 'json'
 
-
 describe Application do
   
   include Rack::Test::Methods
@@ -27,15 +26,30 @@ describe Application do
   end
   
   context 'GET listing/:id' do
-  it 'returns listing ID 2 page' do
-    response = get('/listing/2')      
-    expect(response.status).to eq 200
-    expect(response.body).to include('Pokey underground bedsit')
-    expect(response.body).to include('72 Wally Street')
-    expect(response.body).to include('United States')
+    it 'returns listing ID 2 page' do
+      response = get('/listing/2')      
+      expect(response.status).to eq 200
+      expect(response.body).to include('Pokey underground bedsit')
+      expect(response.body).to include('72 Wally Street')
+      expect(response.body).to include('United States')
+    end
   end
-end
 
+  context 'GET /login' do
+    it 'Creates a form for login' do
+      response = get('/login')
+      expect(response.status). to eq 200
+      expect(response.body).to include 'Login'
+    end
+  end 
+  
+  context 'POST /login' do
+    it 'Logs the user in' do
+      response = post('/login', email: 'champ@weemail.com', password: 'heatbreakhotel')
+      expect(response.status).to eq 302
+    end
+  end    
+  
   context 'GET /booking' do 
     it 'return to the booking form' do 
       response = get('/booking/new')
@@ -59,5 +73,4 @@ end
       expect(bookings.last.listing_id).to eq(1)
     end 
   end
-
 end

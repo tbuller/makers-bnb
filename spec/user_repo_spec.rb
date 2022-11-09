@@ -59,4 +59,13 @@ describe UserRepository do
     expect(users.last.password).to eq('Password')
   end
 
+  it 'finds a user based on the email' do
+    repo = UserRepository.new
+
+    user = repo.find_by_email('champ@weemail.com')
+    expect(user.id).to eq 3
+  end  
+
+
+
 end
