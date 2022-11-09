@@ -7,6 +7,8 @@ require_relative './lib/user_repo'
 DatabaseConnection.connect
 
 class Application < Sinatra::Base
+  enable :sessions
+  
   configure :development do
     register Sinatra::Reloader
   end
@@ -25,15 +27,20 @@ class Application < Sinatra::Base
   
   post '/login' do
     repo = UserRepository.new
-    
+
+    outcome = repo.all
+
     user = repo.find_by_email(params[:email])
-    user_password = user.password
-    p user.password
-    if repo.valid_password?(user_password, params[:password]) == "success"
-      redirect '/'
-    else  
+    if outcome.include?(user)
+      user_password = user.password
+      if repo.valid_password?(user_password, params[:password]) == "success"
+        session[:user_id] = user.id
+        redirect '/'
+      else  
+        redirect '/login'
+      end    
+    else 
       redirect '/login'
-    end    
-  
+    end
   end  
 end

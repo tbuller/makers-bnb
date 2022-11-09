@@ -26,7 +26,7 @@ describe Application do
   end
 
   context 'GET /login' do
-    it 'logs the user in' do
+    it 'Creates a form for login' do
       response = get('/login')
       
       expect(response.status). to eq 200
@@ -37,7 +37,7 @@ describe Application do
   end 
   
   context 'POST /login' do
-    it 'Creates a form for login' do
+    it 'Logs the user in' do
 
       response = post('/login', email: 'champ@weemail.com', password: 'heatbreakhotel')
       expect(response.status).to eq 302
