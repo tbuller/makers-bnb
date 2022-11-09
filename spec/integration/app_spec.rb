@@ -73,4 +73,24 @@ describe Application do
       expect(bookings.last.listing_id).to eq(1)
     end 
   end
+
+  context 'GET /signup/new' do
+    it 'redirects the user to the sign up page' do
+      response = get('/signup/new')
+
+      expect(response.status).to eq 200
+    end
+  end
+  
+  context 'POST /signup' do
+    it 'creates a new user' do
+      response = post('/signup', name: 'Tim', username: 'Timmy', email: 'tim@email', password: 'thing')
+      repo = UserRepository.new
+      users = repo.all
+
+      expect(response.status).to eq 302
+      expect(users.length).to eq 4
+      expect(users.last.name).to eq 'Tim'
+    end
+  end    
 end
