@@ -74,13 +74,18 @@ class UserRepository
 
   def find_bookings(host_id)
     host = find_listings(host_id)
-    listings = host.listings
-
+    listing_with_bookings = []
     listing_repo = ListingRepository.new
-    listings.each do |listing|
+
+    host.listings.each do |listing|
      listing = listing_repo.find_bookings(listing.id)
+     listing_with_bookings << listing
+
      host.bookings << listing.bookings
     end
+
+     host.listings = listing_with_bookings
+
       host.bookings = host.bookings.flatten
     return host
   end

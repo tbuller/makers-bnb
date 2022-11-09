@@ -73,4 +73,13 @@ describe Application do
       expect(bookings.last.listing_id).to eq(1)
     end 
   end
+
+  context 'GET /inbox' do 
+    it 'displays inbox page with list of bookings' do 
+      response = get('/inbox')
+      expect(response.status).to eq 200
+      expect(response.body).to include('')
+      expect(response.body).to include('')
+    end 
+  end
 end

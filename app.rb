@@ -66,6 +66,25 @@ class Application < Sinatra::Base
 
     repo = BookingRepository.new 
     repo.create(booking)
-  end 
-  
+  end
+
+  get '/inbox' do
+    repo = UserRepository.new
+    @host_all = repo.find_bookings(session[:user_id])
+    return erb(:inbox)
+  end
+
+  post '/inbox' do
+    repo = BookingRepository.new
+    approval = params[:approval]
+    booking_id = params[:booking_id]
+    if approval == 'approved'
+      repo.approve(booking_id)
+    else
+      repo.decline(booking_id)
+    end
+    redirect '/inbox'
+    
+  end
+
 end

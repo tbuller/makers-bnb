@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div><h1></h1></div>
+  <div>
+    <div>
+      <%@host_all.listings.each do |listing| %>
+        <h2><%=listing.name%></h2>
+          <%= listing.city %>, <%= listing.country %>
+          <%= listing.ppn %>
+          <% listing.bookings.each do |booking| %>
+            <%= booking.approved %>
+            <%= booking.date %>
+          <div><% if booking.approved == 'f' %>
+            Awaiting approval
+            <form action='/inbox' method='POST'>
+              <input type="hidden" name="approval" value="approved" />
+              <input type="hidden" name="booking_id" value="<%= booking.id %>" />
+              <button type='submit'>Approve </button>
+             </form>
+            <% else %>
+              Booking approved
+              <form action='/inbox' method='POST'>
+                <input type="hidden" name="approval" value="declined" />
+                <input type="hidden" name="booking_id" value="<%= booking.id %>" />
+                <button type='submit'>Unapprove </button>
+              </form>
+              <form action='/inbox' method='POST'>
+                <input type="hidden" name="approval" value="approved" />
+                <input type="hidden" name="booking_id" value="<%= booking.id %>" />
+                <button type='submit'>Approve </button>
+               </form>
+              <% end %>
+          </div>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+</body>
+</html>
