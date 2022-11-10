@@ -119,11 +119,39 @@ class UserRepository
   end  
 
   def valid_password?(db_password, submitted_password)
-    
     if submitted_password == db_password
       return "success"
     else
       return "failure"
     end  
+  end
+
+  def find_by_username(username)
+    sql = 'SELECT * FROM users WHERE username = $1;'
+    result_set = DatabaseConnection.exec_params(sql, [username])
+
+    if result_set.values.empty?
+      return nil 
+    else
+      result_set.each do |record|
+        user = User.new
+        user.id = record['id'].to_i
+        user.name = record['name']
+        user.username = record['username']
+        user.email = record['email']
+        user.password = record['password']
+
+        return user
+      end
+    end
+  end
+
+  def invalid_login_parameters?(email, password)
+    email.match(/<.+>/) || 
+    email.start_with?('<') || 
+    email == "" || 
+    password.match(/<.+>/) ||
+    password.start_with?('<') ||
+    password == "" ? true : false
   end
 end
