@@ -12,9 +12,9 @@ describe UserRepository do
     reset_users_table
   end
 
+  let(:repo) {UserRepository.new}
 
   it "returns all users" do
-    repo = UserRepository.new
     users = repo.all
 
     expect(users.length).to eq(3)
@@ -23,7 +23,6 @@ describe UserRepository do
   end
 
   it "finds a single user" do
-    repo = UserRepository.new
     user = repo.find(2)
     expect(user.id).to eq(2)
     expect(user.name).to eq('Stone Cold Steve Austin')
@@ -31,7 +30,6 @@ describe UserRepository do
   end
 
   it "finds a single user" do
-    repo = UserRepository.new
     user = repo.find(3)
     expect(user.id).to eq(3)
     expect(user.name).to eq('The Rock')
@@ -39,8 +37,6 @@ describe UserRepository do
   end
 
   it "creates a new user" do
-    repo = UserRepository.new
-
     new_user = User.new
     new_user.name = 'Mankind'
     new_user.username = 'mrsocko'
@@ -60,13 +56,11 @@ describe UserRepository do
   end
 
   it 'finds a user based on the email' do
-    repo = UserRepository.new
     user = repo.find_by_email('champ@weemail.com')
     expect(user.id).to eq 3
   end  
 
   it 'finds listings for user ID 3' do
-    repo = UserRepository.new
     user = repo.find_listings(3)
     expect(user.listings.length).to eq(2)
     expect(user.listings.first.city).to eq('Oslo')
@@ -75,11 +69,9 @@ describe UserRepository do
   end
 
   it 'finds bookings for user ID 2' do
-    repo = UserRepository.new
     user = repo.find_bookings(2)
     expect(user.bookings.length).to eq(2)
     expect(user.bookings.first.id).to eq(2)
     expect(user.bookings.last.date).to eq('2022-12-25')
   end
-
 end

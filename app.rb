@@ -59,20 +59,17 @@ class Application < Sinatra::Base
   post '/login' do
     repo = UserRepository.new
 
-    outcome = repo.all
-
     user = repo.find_by_email(params[:email])
 
-    if outcome.to_s.include?(user.email)
-      user_password = user.password
-      if repo.valid_password?(user_password, params[:password]) == "success"
+    if user != nil
+      if repo.valid_password?(user.password, params[:password]) == "success"
         session[:user_id] = user.id
         redirect '/'
-      else  
+      else
         redirect '/login'
       end    
     else 
-      redirect '/login'
+      redirect '/login' # you havent signed up link here?
     end
   end  
 
