@@ -1,61 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<title>List a home | Makersbnb</title>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
+
 <body>
+
+  <div class="topnav">
+  <img src="/makersbnb-logo.png" class="logo" />
+
+  <div class="navlinks">
+      <a href="/">&#127968 Home</a>
+      <% if session[:user_id] == nil %>
+      <a href="/signup/new">&#127968 Sign up</a>
+      <a href="/login">&#127968 Log in</a>
+      <% else %>
+      <a href="/inbox">&#127968 My bookings</a>
+      <a href="/listing/new">&#127968 New listing</a>
+      <a href="/logout">&#127968 Log out</a>
+      <% end %>
+  </div>
+</div>
+
+  <div class="content">
   <h1>New Listing</h1>
-  <form method="POST" action="/listing">
-  <div>
-  <label> Please enter name of the listing:</label>
-  <input type="text" name="name">
-  </div>
-  <br>
-  <div>
-  <label> Please provide an address:</label>
-  <input type="text" name="address">
-  </div>
-  <br>
-  <div>
-  <label> Please provide a city:</label>
-  <input type="text" name="city">
-  </div>
-  <br>
-  <div>
-  <label> Please provide a country:</label>
-  <input type="text" name="country">
-  </div>
-  <br>
-  <div>
-  <label> Please provide the price per night:</label>
-  <input type="money" name="ppn">
-  </div>
-  <br>
-  <div>
-  <label> Please provide a listing description:</label>
-  <input type="text" name="description">
-  </div>
-  <br>
-  <div>
-  <label> Please enter account id:</label>
-  <input type="text" name="host_id">
-  </div>
-  <br>
-  <div>
-  <label> Please provide start date:</label>
-  <input type="date" name="available_start">
-  </div>
-  <br>
-  <div>
-  <label> Please provide an end date:</label>
-  <input type="date" name="available_end">
-  </div>
-  
-  
-  <input type="submit" value="Add listing" />
+  <div class="center-field">
+      <form method="POST" action="/listing">
+      <div>
+      <label>Listing name:</label>
+        <input type="text" placeholder="e.g. 2 bed flat" name="name">
+      </div>
+
+      <div>
+        <label>Address:</label>
+        <input type="text" placeholder="e.g. 12 Street Road" name="address">
+      </div>
+
+      <div>
+        <label>City:</label>
+        <input type="text" placeholder="e.g. London" name="city">
+      </div>
+
+      <div>
+        <label>Country:</label>
+        <input type="text" placeholder="e.g. United Kingdom" name="Country">
+      </div>
+
+      <div>
+        <label>Price per night (USD$):</label>
+        <input type="money" placeholder="e.g. $50.00" name="ppn">
+      </div>
+
+      <div>
+        <label>Description:</label>
+        <input type="text" placeholder="e.g. Quiet flat on stunning road" name="description">
+      </div>
+
+      <div>
+      <label>Availabile from (date):</label>
+      <input type="date" name="available_start">
+      </div>
+
+      <div>
+      <label> Availabile until (date):</label>
+      <input type="date" name="available_end">
+      </div>
+
+      <input type="submit" value="Add listing" />
     </form>
+
+    </div>
+  </div>
 </body>
+
 </html>

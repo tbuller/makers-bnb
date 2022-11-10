@@ -1,21 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>MakersBnB</title>
-         
-        
-        <link rel="stylesheet" href="/style.css" >
+        <title>Makersbnb - Perfect stay? Affirmative.</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/style.css">
     </head>
+    
     <body>
-        <div><h1> Makersbnb </h1></div>
-        <div><h2> Listings near you </h2>
-        <% @listings.each do |listing| %>
-        <div>
-        <h3><%= listing.name %></h3>
-        <%= "#{listing.city}, #{listing.country}. Price: #{listing.ppn}" %>
+
+    <div class="topnav">
+        <img src="/makersbnb-logo.png" class="logo" />
+
+        <div class="navlinks">
+            <a href="/">&#127968 Home</a>
+            <% if session[:user_id] == nil %>
+            <a href="/signup/new">&#127968 Sign up</a>
+            <a href="/login">&#127968Log in</a>
+            <% else %>
+            <a href="/inbox">&#127968 My bookings</a>
+            <a href="/listing/new">&#127968 New listing</a>
+            <a href="/logout">&#127968 Log out</a>
+            <% end %>
         </div>
-        <% end %>
+    </div>
+    
+    <div class="content">
+        <div class="center-field">
+            <h1>Perfect stay? Affirmative.</h1>
+
+            <h2>Affirmed homes near you</h2>
+
+            <div class="listing-feed">
+                <% @listings.each do |listing| %>
+                    
+                        <div class="listing-card">
+                        <h3><a href="/listing/<%= listing.id %>"><%= listing.name %></a></h3>
+                        <p><%= "#{listing.city}, #{listing.country}" %></p>
+                        <p><%= " Price: #{listing.ppn}" %></p>
+                        <a href="/listing/<%= listing.id %>"><button>View listing</button></a>
+                        </div>
+                <% end %>
+            </div>
+
         </div>
+
+    </div>
 
     </body>
 </html>

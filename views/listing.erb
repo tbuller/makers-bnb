@@ -1,36 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="/style.css" >
-</head>
+    <head>
+        <title><%= @listing.name %> | Makersbnb</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+    </head>
 
 <body>
 
-<div class="listing-card">
-  <div>
-  <h1> <%= @listing.name %> </h1>
+<div class="topnav">
+<img src="/makersbnb-logo.png" class="logo" />
+
+<div class="navlinks">
+    <a href="/">&#127968 Home</a>
+    <% if session[:user_id] == nil %>
+    <a href="/signup/new">&#127968 Sign up</a>
+    <a href="/login">&#127968 Log in</a>
+    <% else %>
+    <a href="/inbox">&#127968 My bookings</a>
+    <a href="/listing/new">&#127968 New listing</a>
+    <a href="/logout">&#127968 Log out</a>
+    <% end %>
+</div>
+</div>
+
+<div class="center-field">
+  <div class="listing-img">
+    <img src="/listing.jpg"/>
   </div>
 
   <div>
-  <%= @listing.ppn %>
+  <h1><%= @listing.name %></h1>
+  <h2>Listing details:</h2>
   </div>
 
   <div>
-  <%= @listing.address %>, <%= @listing.city %>, <%= @listing.country %>
+    <h3>Price per night:</h3>
+    <p><%= @listing.ppn %></p>
   </div>
 
   <div>
-  <%= @listing.description %>
+    <h3>Address</h3>
+    <p><%= @listing.address %>, <%= @listing.city %>, <%= @listing.country %></p>
   </div>
-  <form method="POST" action="/booking">
-  <input type="date" name="date">
-  <input type="submit" value="Book">
+
+  <div>
+    <h3>About this listing:</h3>
+    <p><%= @listing.description %></p>
+  </div>
+
+  <div>
+    <h2>Check availability & book</h2>
+    <form method="POST" action="/booking">
+    <input type="date" name="date">
+    <input type="submit" value="Book" class="button">
+    </form>
+  </div>
 
 </div>
+
   
 </body>
 
