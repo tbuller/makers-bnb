@@ -133,6 +133,9 @@ class Application < Sinatra::Base
     elsif repo.find_by_username(params[:username]) != nil
       flash[:notice] = "Username already exists."
       redirect '/signup/new'
+    elsif URI::MailTo::EMAIL_REGEXP.match?(params[:email]) != true
+      flash[:notice] = "Please use a valid email."
+      redirect '/signup/new'
     else
       user = User.new
       user.name = params[:name]
