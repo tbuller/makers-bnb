@@ -1,6 +1,6 @@
 require_relative 'user'
 require_relative 'booking'
-require_relative 'bookings_repository'
+require_relative 'booking_repository'
 require_relative 'listing_repository'
 
 class UserRepository
