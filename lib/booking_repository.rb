@@ -1,4 +1,4 @@
-require_relative '../lib/bookings'
+require_relative '../lib/booking'
 
 class BookingRepository 
   def all

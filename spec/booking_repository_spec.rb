@@ -1,4 +1,4 @@
-require_relative '../lib/bookings_repository'
+require_relative '../lib/booking_repository'
 require_relative '../lib/database_connection'
  
 def reset_bookings_table
