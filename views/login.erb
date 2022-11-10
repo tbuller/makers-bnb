@@ -1,13 +1,51 @@
-<h1> Login </h1>
-<form method="POST" action="/login">
-  <div>
-    <label>Email: </label>
-    <input type="text" name="email" />
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Log in | Makersbnb</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+    </head>
+    <body>
+    <div class="topnav">
+    <img src="/makersbnb-logo.png" class="logo" />
+  
+    <div class="navlinks">
+        <a href="/">&#127968 Home</a>
+        <% if session[:user_id] == nil %>
+        <a href="/signup/new">&#127968 Sign up</a>
+        <a href="/login">&#127968 Log in</a>
+        <% else %>
+        <a href="/inbox">&#127968 My bookings</a>
+        <a href="/listing/new">&#127968 New listing</a>
+        <a href="/logout">&#127968 Log out</a>
+        <% end %>
+    </div>
   </div>
-  <div>
-    <label>Password: </label>
-    <input type="password" name="password" />
+
+
+  <div class="content">
+    <div class="center-field">
+    <h3> Login </h3>
+    <form method="POST" action="/login">
+      <div>
+        <label>Email: </label>
+        <input type="text" name="email" />
+      </div>
+      <div>
+        <label>Password: </label>
+        <input type="password" name="password" />
+      </div>
+      <input type="submit" value="Log in" />
+    </form>
+
+    <div>
+    <p>New to Makersbnb? Sign up for free to create an account.</p>
+    <a href="/signup/new"><button>Sign up</button></a>
+    </div> 
+</div>
   </div>
-  <input type="submit" value="Log in" />
-</form>
+    </body>
+</html>
         

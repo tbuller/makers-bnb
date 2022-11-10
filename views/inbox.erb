@@ -1,34 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+    <head>
+        <title>Inbox | Makersbnb</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+    </head>
 <body>
-  <div><h1></h1></div>
+<div class="topnav">
+<img src="/makersbnb-logo.png" class="logo" />
+
+<div class="navlinks">
+    <a href="/">&#127968 Home</a>
+    <% if session[:user_id] == nil %>
+    <a href="/signup/new">&#127968 Sign up</a>
+    <a href="/login">&#127968 Log in</a>
+    <% else %>
+    <a href="/inbox">&#127968 My bookings</a>
+    <a href="/listing/new">&#127968 New listing</a>
+    <a href="/logout">&#127968 Log out</a>
+    <% end %>
+</div>
+</div>
   <div>
-    <div>
-      <%@host_all.listings.each do |listing| %>
-        <h2><%=listing.name%></h2>
-          <%= listing.city %>, <%= listing.country %>
-          <%= listing.ppn %>
+  <h1>My inbox</h1>
+    <div class="center-field">
+      <% @host_all.listings.each do |listing| %>
+        <h3><%=listing.name%></h3>
+        <p>Listing location: <%= listing.city %>, <%= listing.country %></p>
+        <p>Price per night: <%= listing.ppn %></p>
           <% listing.bookings.each do |booking| %>
-            <%= booking.date %>
-          <div><% if booking.approved == 'false' %>
-            Awaiting approval
-            <form action='/inbox' method='POST'>
+            <h4>## BOOKING ##</h4>
+            <p>Reservation date: <%= booking.date %></p>
+          <div>
+          <% if booking.approved == 'f' %>
+          <p>Awaiting approval</p>
+            <form action="/inbox" method="POST">
               <input type="hidden" name="approval" value="approved" />
               <input type="hidden" name="booking_id" value="<%= booking.id %>" />
               <button type='submit'>Approve </button>
              </form>
             <% else %>
-              Booking approved
-              <form action='/inbox' method='POST'>
+            <p>Booking approved</p>
+              <form action="/inbox" method="POST">
                 <input type="hidden" name="approval" value="declined" />
                 <input type="hidden" name="booking_id" value="<%= booking.id %>" />
-                <button type='submit'>Unapprove </button>
+                <button type="submit">Unapprove</button>
               </form>
               <% end %>
           </div>
