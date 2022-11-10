@@ -35,8 +35,8 @@ class BookingRepository
   end 
   
   def create(booking)
-    sql = 'INSERT INTO bookings (date, user_id, listing_id) VALUES($1, $2, $3);'
-    sql_params = [booking.date, booking.user_id, booking.listing_id]
+    sql = 'INSERT INTO bookings (date, user_id, listing_id, approved) VALUES($1, $2, $3, $4);'
+    sql_params = [booking.date, booking.user_id, booking.listing_id, booking.approved]
     DatabaseConnection.exec_params(sql, sql_params)
     return nil
   end

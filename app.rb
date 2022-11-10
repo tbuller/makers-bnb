@@ -99,7 +99,7 @@ class Application < Sinatra::Base
     booking.date = params[:date]
     booking.user_id = session[:user_id] ||= params[:user_id]
     booking.listing_id = session[:listing_id] ||= params[:listing_id]
-
+    booking.approved = 'f'
     repo = BookingRepository.new 
     repo.create(booking)
     redirect '/inbox'
