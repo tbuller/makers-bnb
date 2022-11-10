@@ -42,8 +42,8 @@ class ListingRepository
   end
 
   def create(listing)
-    sql = 'INSERT INTO listings (name, address, city, country, ppn, description, host_id) VALUES ($1, $2, $3, $4, $5, $6, $7);'
-    DatabaseConnection.exec_params(sql, [listing.name, listing.address, listing.city, listing.country, listing.ppn, listing.description, listing.host_id])
+    sql = 'INSERT INTO listings (name, address, city, country, ppn, description, host_id, available_start, available_end) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);'
+    DatabaseConnection.exec_params(sql, [listing.name, listing.address, listing.city, listing.country, listing.ppn, listing.description, listing.host_id, listing.available_start, listing.available_end])
   end
 
   def find_bookings(listing_id)

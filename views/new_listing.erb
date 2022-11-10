@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>New Listing</h1>
+  <form method="POST" action="/listing">
+  <div>
+  <label> Please enter name of the listing:</label>
+  <input type="text" name="name">
+  </div>
+  <br>
+  <div>
+  <label> Please provide an address:</label>
+  <input type="text" name="address">
+  </div>
+  <br>
+  <div>
+  <label> Please provide a city:</label>
+  <input type="text" name="city">
+  </div>
+  <br>
+  <div>
+  <label> Please provide a country:</label>
+  <input type="text" name="country">
+  </div>
+  <br>
+  <div>
+  <label> Please provide the price per night:</label>
+  <input type="money" name="ppn">
+  </div>
+  <br>
+  <div>
+  <label> Please provide a listing description:</label>
+  <input type="text" name="description">
+  </div>
+  <br>
+  <div>
+  <label> Please enter account id:</label>
+  <input type="text" name="host_id">
+  </div>
+  <br>
+  <div>
+  <label> Please provide start date:</label>
+  <input type="date" name="available_start">
+  </div>
+  <br>
+  <div>
+  <label> Please provide an end date:</label>
+  <input type="date" name="available_end">
+  </div>
+  
+  
+  <input type="submit" value="Add listing" />
+    </form>
+</body>
+</html>
