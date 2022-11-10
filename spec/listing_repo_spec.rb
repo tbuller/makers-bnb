@@ -1,5 +1,6 @@
 require_relative '../lib/listing_repo'
 require_relative '../lib/database_connection'
+require_relative '../lib/listing'
 
 def reset_table
   seed_sql = File.read('spec/seeds.sql')
@@ -61,5 +62,16 @@ describe ListingRepository do
     expect(listing.bookings.length).to eq(1)
     expect(listing.bookings.first.date).to eq('2022-03-01')
     expect(listing.bookings.first.user_id).to eq(2)
-  end
+  end 
+  
+  it 'returns an array of dates less the dates that have been approved' do
+    repo = ListingRepository.new
+    dates_available = repo.give_date_range(5)
+    dates_available2 = repo.give_date_range(7)
+
+    expect(dates_available).to eq ["2022-12-26", "2022-12-27", "2022-12-28", "2022-12-29", "2022-12-30", "2022-12-31", "2023-01-01", "2023-01-02"]
+    expect(dates_available2).to eq ["2022-11-12", "2022-11-13", "2022-11-15", "2022-11-17", "2022-11-18"]
+
+  end 
+  
 end
