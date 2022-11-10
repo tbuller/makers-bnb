@@ -72,8 +72,6 @@ class ListingRepository
       booking.user_id = record['customer_id'].to_i
       booking.approved = record['approved']
       listing.bookings << booking
-      p booking.approved
-      p record['approved']
     end
     return listing
   end

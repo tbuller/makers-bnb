@@ -54,13 +54,13 @@ RSpec.describe BookingRepository do
     repo = BookingRepository.new
     repo.approve(1)
     booking = repo.find(1)
-    expect(booking.approved).to eq "t"
+    expect(booking.approved).to eq "true"
   end 
 
   it "updates the booking with id 6 to false" do
     repo = BookingRepository.new
     repo.decline(6)
     booking = repo.find(6)
-    expect(booking.approved).to eq "f"
+    expect(booking.approved).to eq "false"
   end 
 end
