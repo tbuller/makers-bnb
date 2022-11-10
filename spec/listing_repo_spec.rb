@@ -54,4 +54,12 @@ describe ListingRepository do
     expect(listing.city).to eq('Sao Paolo')
     expect(listing.country).to eq('Mexico')
   end
+
+  it 'returns bookings for listing ID 2' do
+    repo = ListingRepository.new
+    listing = repo.find_bookings(2)
+    expect(listing.bookings.length).to eq(1)
+    expect(listing.bookings.first.date).to eq('2022-03-01')
+    expect(listing.bookings.first.user_id).to eq(2)
+  end
 end

@@ -11,9 +11,9 @@ INSERT INTO listings (name, address, city, country, ppn, description, host_id, a
 INSERT INTO listings (name, address, city, country, ppn, description, host_id, available_start, available_end) VALUES ('Lovers first choice', '10 Teal Road', 'Paris', 'France',' $760.00', 'Luxury flat in the heart of Paris, with romantic views of the Eiffel tower', 2, '2022-12-25', '2023-01-02');
 INSERT INTO listings (name, address, city, country, ppn, description, host_id, available_start, available_end) VALUES ('Cute caravan x', 'Nelly Fields', 'Hamburg', 'Germany', '$40.00', 'The perfect retreat, away from the hassle of big town life', 3, '2023-07-12', '2024-03-08');
 
-INSERT INTO bookings (date, user_id, listing_id, approved) VALUES ('2022-05-01', 1, 1, false);
-INSERT INTO bookings (date, user_id, listing_id, approved) VALUES ('2022-03-01', 2, 2, false);
-INSERT INTO bookings (date, user_id, listing_id, approved) VALUES ('2022-07-12', 3, 3, false);
-INSERT INTO bookings (date, user_id, listing_id, approved) VALUES ('2022-02-08', 1, 4, true);
-INSERT INTO bookings (date, user_id, listing_id, approved) VALUES ('2022-12-25', 2, 5, true);
-INSERT INTO bookings (date, user_id, listing_id, approved) VALUES ('2022-09-13', 3, 6, true);
+INSERT INTO bookings (date, user_id, listing_id, approved) VALUES ('2022-05-01', 1, 1, 'f');
+INSERT INTO bookings (date, user_id, listing_id, approved) VALUES ('2022-03-01', 2, 2, 'f');
+INSERT INTO bookings (date, user_id, listing_id, approved) VALUES ('2022-07-12', 3, 3, 'f');
+INSERT INTO bookings (date, user_id, listing_id, approved) VALUES ('2022-02-08', 1, 4, 't');
+INSERT INTO bookings (date, user_id, listing_id, approved) VALUES ('2022-12-25', 2, 5, 't');
+INSERT INTO bookings (date, user_id, listing_id, approved) VALUES ('2022-09-13', 3, 6, 't');

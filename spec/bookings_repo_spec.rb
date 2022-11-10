@@ -33,7 +33,7 @@ RSpec.describe BookingRepository do
     expect(booking.listing_id).to eq(1)
    end 
 
-   it 'creates a new booking' do 
+  it 'creates a new booking' do 
     repo = BookingRepository.new 
 
     booking = Booking.new 
@@ -48,5 +48,19 @@ RSpec.describe BookingRepository do
     last_booking = bookings.last
     expect(last_booking.date).to eq '2022-06-06'
     expect(last_booking.listing_id).to eq 6
+  end 
+
+  it "updates the booking with id = 1 to true" do
+    repo = BookingRepository.new
+    repo.approve(1)
+    booking = repo.find(1)
+    expect(booking.approved).to eq "true"
+  end 
+
+  it "updates the booking with id 6 to false" do
+    repo = BookingRepository.new
+    repo.decline(6)
+    booking = repo.find(6)
+    expect(booking.approved).to eq "false"
   end 
 end

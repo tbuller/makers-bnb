@@ -53,7 +53,6 @@ describe Application do
   context 'GET /booking' do 
     it 'return to the booking form' do 
       response = get('/booking/new')
-
       expect(response.status).to eq 200
       expect(response.body).to include('<h1>Create Booking</h1>')
       expect(response.body).to include('<input type="date" name="date">')
@@ -64,7 +63,6 @@ describe Application do
   context 'POST /booking' do 
     it 'posts booking form to database' do 
       response = post('/booking', date: '2022-11-08', user_id: 1, listing_id: 1)
-
       expect(response.status).to eq 200
       repo = BookingRepository.new
       bookings = repo.all
@@ -74,10 +72,18 @@ describe Application do
     end 
   end
 
+  context 'GET /inbox' do 
+    it 'displays inbox page with list of bookings' do 
+      response = get('/inbox')
+      expect(response.status).to eq 200
+      expect(response.body).to include('')
+      expect(response.body).to include('')
+    end 
+  end
+  
   context 'GET /signup/new' do
     it 'redirects the user to the sign up page' do
       response = get('/signup/new')
-
       expect(response.status).to eq 200
     end
   end
@@ -87,7 +93,6 @@ describe Application do
       response = post('/signup', name: 'Tim', username: 'Timmy', email: 'tim@email', password: 'thing')
       repo = UserRepository.new
       users = repo.all
-
       expect(response.status).to eq 302
       expect(users.length).to eq 4
       expect(users.last.name).to eq 'Tim'
@@ -97,7 +102,6 @@ describe Application do
   context 'GET /listing/new' do 
     it 'loads a form to create a new lisitng' do 
       response = get('/listing/new')
-
       expect(response.status).to eq 200 
     end 
   end
@@ -107,10 +111,8 @@ describe Application do
       response = post('/listing', name: 'Property A', address: '12 Arroyo Lane', city: 'London', country: 'UK', ppn: '$120.00', description: 'nice place tbh', host_id: 2, available_start: '2022-11-20', available_end: '2022-12-31')
       repo = ListingRepository.new
       listings = repo.all
-      
-      #expect(response.status).to eq 302
+      expect(response.status).to eq 302
       expect(listings.length).to eq 7
-
     end
   end    
 end
