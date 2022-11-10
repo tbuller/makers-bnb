@@ -3,6 +3,7 @@ class Listing
 
   def initialize 
     @bookings = []
-  end
+  end 
 
+  
 end

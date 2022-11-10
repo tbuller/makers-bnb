@@ -4,34 +4,55 @@
   <% end %>
 <html lang="en">
 <head>
+  <title>Sign up | Makersbnb</title>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 <body>
-  <h1>Signup page</h1>
+
+<div class="topnav">
+  <img src="/makersbnb-logo.png" class="logo" />
+
+  <div class="navlinks">
+      <a href="/">&#127968 Home</a>
+      <% if session[:user_id] == nil %>
+      <a href="/signup/new">&#127968 Sign up</a>
+      <a href="/login">&#127968 Log in</a>
+      <% else %>
+      <a href="/inbox">&#127968 My bookings</a>
+      <a href="/listing/new">&#127968 New listing</a>
+      <a href="/logout">&#127968 Log out</a>
+      <% end %>
+  </div>
+</div>
+
+<div class="content">
+
+  <h1>Sign up to Makersbnb</h1>
+  <div class="center-field">
     <form method="POST" action="/signup">
-  <div>
-  <label> Please enter your name:</label>
-  <input type="text" name="name">
-  </div>
-  <br>
-  <div>
-  <label> Please choose a username:</label>
-  <input type="text" name="username">
-  </div>
-  <br>
-  <div>
-  <label> Please enter your email:</label>
-  <input type="text" name="email">
-  </div>
-  <br>
-  <div>
-  <label> Please choose a secure password:</label>
-  <input type="password" name="password">
-  </div>
-  <input type="submit" value="Create account" />
+      <div>
+      <label>Your name:</label>
+      <input type="text" name="name">
+      </div>
+      <br>
+      <div>
+      <label>Username:</label>
+      <input type="text" name="username">
+      </div>
+      <br>
+      <div>
+      <label>Email:</label>
+      <input type="text" name="email">
+      </div>
+      <br>
+      <div>
+      <label>Password:</label>
+      <input type="password" name="password">
+      </div>
+      <input type="submit" value="Create account" />
     </form>
 </body>
 </html>

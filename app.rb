@@ -23,6 +23,11 @@ class Application < Sinatra::Base
 
     return erb(:index)
   end
+
+  get '/logout' do
+    session[:user_id] = nil
+    redirect '/'
+  end
   
   get '/listing/new' do 
    return erb(:new_listing)
@@ -37,7 +42,7 @@ class Application < Sinatra::Base
     listing.country = params[:country]
     listing.ppn = params[:ppn]
     listing.description = params[:description]
-    listing.host_id = params[:host_id].to_i
+    listing.host_id = session[:user_id] ||= params[:host_id].to_i
     listing.available_start = params[:available_start]
     listing.available_end = params[:available_end]
 
