@@ -1,5 +1,5 @@
 require_relative 'listing'
-require_relative 'bookings'
+require_relative 'booking'
 
 class ListingRepository
   def all

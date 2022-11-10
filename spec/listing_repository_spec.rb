@@ -1,4 +1,4 @@
-require_relative '../lib/listing_repo'
+require_relative '../lib/listing_repository'
 require_relative '../lib/database_connection'
 require_relative '../lib/listing'
 
