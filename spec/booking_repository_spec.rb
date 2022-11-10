@@ -18,7 +18,7 @@ RSpec.describe BookingRepository do
     
     booking = repo.all
 
-    expect(booking.length).to eq(6)
+    expect(booking.length).to eq(8)
     expect(booking.first.id).to eq(1)
     expect(booking.first.date).to eq ('2022-05-01')
     expect(booking.first.user_id).to eq(1)
@@ -54,13 +54,13 @@ RSpec.describe BookingRepository do
     repo = BookingRepository.new
     repo.approve(1)
     booking = repo.find(1)
-    expect(booking.approved).to eq "true"
+    expect(booking.approved).to eq "t"
   end 
 
   it "updates the booking with id 6 to false" do
     repo = BookingRepository.new
     repo.decline(6)
     booking = repo.find(6)
-    expect(booking.approved).to eq "false"
+    expect(booking.approved).to eq "f"
   end 
 end

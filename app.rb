@@ -1,10 +1,10 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require 'sinatra/flash'
-require_relative './lib/listing_repo'
+require_relative './lib/listing_repository'
 require_relative './lib/database_connection'
-require_relative './lib/user_repo'
-require_relative './lib/bookings_repository'
+require_relative './lib/user_repository'
+require_relative './lib/booking_repository'
 
 DatabaseConnection.connect
 

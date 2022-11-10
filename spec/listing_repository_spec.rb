@@ -16,7 +16,7 @@ describe ListingRepository do
   it 'returns all listings' do
     repo = ListingRepository.new
     listings = repo.all
-    expect(listings.length).to eq 6
+    expect(listings.length).to eq 7
     expect(listings[2].name).to eq('Flashy mansion')
     expect(listings[5].city).to eq('Hamburg')
     expect(listings[5].host_id).to eq(3)

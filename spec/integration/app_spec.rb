@@ -1,4 +1,4 @@
-require_relative '../../lib/listing_repo'
+require_relative '../../lib/listing_repository'
 require_relative '../../lib/database_connection'
 require "spec_helper"
 require "rack/test"
@@ -109,7 +109,7 @@ describe Application do
       repo = ListingRepository.new
       listings = repo.all
       expect(response.status).to eq 302
-      expect(listings.length).to eq 7
+      expect(listings.length).to eq 8
     end
   end    
 end

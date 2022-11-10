@@ -42,12 +42,12 @@ class BookingRepository
   end
 
   def approve(booking_id)
-    sql = 'UPDATE bookings SET approved = true WHERE id = $1'
+    sql = 'UPDATE bookings SET approved = \'t\' WHERE id = $1;'
     DatabaseConnection.exec_params(sql, [booking_id])
   end
 
   def decline(booking_id)
-    sql = 'UPDATE bookings SET approved = false WHERE id = $1'
+    sql = 'UPDATE bookings SET approved = \'f\' WHERE id = $1;'
     DatabaseConnection.exec_params(sql, [booking_id])
   end
 end 
