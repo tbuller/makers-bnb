@@ -1,4 +1,5 @@
 require_relative '../lib/booking'
+require_relative '../lib/listing'
 
 class BookingRepository 
   def all
@@ -49,5 +50,24 @@ class BookingRepository
   def decline(booking_id)
     sql = 'UPDATE bookings SET approved = \'f\' WHERE id = $1;'
     DatabaseConnection.exec_params(sql, [booking_id])
+  end
+
+  def find_listing(booking_id)
+    sql = 'SELECT listings.id AS listing_id, name, address, city, country, ppn, bookings.id, date, user_id FROM listings
+    JOIN bookings ON listing_id = listings.id
+    WHERE bookings.id = $1;'
+
+    result = DatabaseConnection.exec_params(sql, [booking_id])
+    
+    result.each do |record|
+      listing = Listing.new
+      listing.id = record['listing_id'].to_i
+      listing.name = record['name']
+      listing.address = record['address']
+      listing.city = record['city']
+      listing.country = record['country']
+      listing.ppn = record['ppn']
+      return listing
+    end
   end
 end 

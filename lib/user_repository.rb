@@ -1,5 +1,6 @@
 require_relative 'user'
 require_relative 'booking'
+require_relative 'listing'
 require_relative 'booking_repository'
 require_relative 'listing_repository'
 require 'bcrypt'
@@ -167,16 +168,14 @@ class UserRepository
 
     result = DatabaseConnection.exec_params(sql, [user_id])
 
-    user = User.new
+    @user = User.new
     result.each do |record|
-     
       booking = Booking.new
       listing = Listing.new
-      
-      user.id = record['user_id'].to_i
-      user.name = record['user_name']
-      user.username = record['username']
-      user.email = record['email']
+      @user.id = record['user_id'].to_i
+      @user.name = record['user_name']
+      @user.username = record['username']
+      @user.email = record['email']
       booking.id = record['booking_id']
       booking.date = record['booking_date'] 
       listing.name = record['listing_name']
@@ -184,8 +183,19 @@ class UserRepository
       listing.country = record['listing_country']
       listing.ppn = record['listing_ppn']
 
-      user.listings << user << booking << listing
-    end 
-   p user.listings
-  end 
+      @user.stays << booking
+
+      booking_repo = BookingRepository.new
+
+      @user.stays.each do |booking|
+        listing = booking_repo.find_listing(booking.id)
+        listing.stays << booking
+        @user.stay_listings << listing
+      end
+
+    end
+
+   return @user
+  end
+
 end
