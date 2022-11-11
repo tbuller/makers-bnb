@@ -1,5 +1,6 @@
 require_relative 'user'
 require_relative 'booking'
+require_relative 'listing'
 require_relative 'booking_repository'
 require_relative 'listing_repository'
 require 'bcrypt'
@@ -154,4 +155,47 @@ class UserRepository
     password.start_with?('<') ||
     password == "" ? true : false
   end
+
+  def find_bookings_by_user(user_id)
+    sql = 'SELECT users.id AS user_id, users.name AS user_name, users.username,
+     users.email, bookings.id AS booking_id,
+    bookings.date AS booking_date, bookings.user_id, bookings.listing_id,
+    listings.name AS listing_name, city AS listing_city, country AS listing_country, 
+    ppn AS listing_ppn FROM users
+    JOIN bookings ON user_id = users.id
+    JOIN listings ON listing_id = listings.id 
+    WHERE users.id = $1;'
+
+    result = DatabaseConnection.exec_params(sql, [user_id])
+
+    @user = User.new
+    result.each do |record|
+      booking = Booking.new
+      listing = Listing.new
+      @user.id = record['user_id'].to_i
+      @user.name = record['user_name']
+      @user.username = record['username']
+      @user.email = record['email']
+      booking.id = record['booking_id']
+      booking.date = record['booking_date'] 
+      listing.name = record['listing_name']
+      listing.city = record['listing_city']
+      listing.country = record['listing_country']
+      listing.ppn = record['listing_ppn']
+
+      @user.stays << booking
+
+      booking_repo = BookingRepository.new
+
+      @user.stays.each do |booking|
+        listing = booking_repo.find_listing(booking.id)
+        listing.stays << booking
+        @user.stay_listings << listing
+      end
+
+    end
+
+   return @user
+  end
+
 end

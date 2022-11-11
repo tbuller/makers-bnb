@@ -26,6 +26,21 @@
   <div>
   <h1>My inbox</h1>
     <div class="center-field">
+    <div>
+    <h2>Your stays</h2>
+    <% @user.stay_listings.each do |listing| %>
+      <h3><%=listing.name%></h3>
+      <p>Listing location: <%= listing.city %>, <%= listing.country %></p>
+      <p>Price per night: <%= listing.ppn %></p>
+        <% listing.stays.each do |booking| %>
+          <h4>## BOOKING ##</h4>
+          <p>Reservation date: <%= booking.date %></p>
+        <% end %>
+    <% end %>
+  </div>
+    <div>
+      <h2>Bookings for your properties</h2>
+
       <% @host_all.listings.each do |listing| %>
         <h3><%=listing.name%></h3>
         <p>Listing location: <%= listing.city %>, <%= listing.country %></p>
@@ -52,6 +67,7 @@
           </div>
           <% end %>
       <% end %>
+    </div>
     </div>
   </div>
 </body>

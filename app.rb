@@ -118,7 +118,9 @@ class Application < Sinatra::Base
   get '/inbox' do
     repo = UserRepository.new
     @host_all = repo.find_bookings(session[:user_id])
+    @user = repo.find_bookings_by_user(session[:user_id])
     return erb(:inbox)
+
   end
 
   post '/inbox' do

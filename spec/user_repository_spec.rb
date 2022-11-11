@@ -74,4 +74,9 @@ describe UserRepository do
     expect(user.bookings.first.id).to eq(2)
     expect(user.bookings.last.date).to eq('2022-12-25')
   end
+
+  it 'finds user.listings not be emtpy' do 
+    user = repo.find_bookings_by_user(1)
+    expect(user.stay_listings).to eq []
+  end
 end
