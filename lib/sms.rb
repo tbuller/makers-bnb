@@ -15,7 +15,7 @@ class SMS
     # Sends SMS using Twilio API, addressed to customer and with estimated delivery time
     @client.messages.create(
     from: ENV['TWILIO_TEST_MOBILE_NUMBER'], # Twilio mobile number, in ENV
-    to: ENV['MY_NUM'], # Customer mobile number
+    to: ENV['TEST_NUM'], # Customer mobile number
     body: "Hey #{@user}, your request to book was confirmed"
     )
     return "Text sent successfully."

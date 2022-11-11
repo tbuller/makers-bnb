@@ -76,6 +76,8 @@ class Application < Sinatra::Base
     if user != nil
       if repo.valid_password?(user.password, params[:password]) == "success"
         session[:user_id] = user.id
+        session[:user_name] = user.name
+        session[:user_username] = user.username
         redirect '/'
       else
         redirect '/login'
@@ -104,8 +106,7 @@ class Application < Sinatra::Base
     if available_dates.include?(booking.date)
       booking_repo = BookingRepository.new 
       booking_repo.create(booking)
-      @user = "Tim"
-      new_sms = SMS.new(@user)
+      new_sms = SMS.new(session[:user_name])
       new_sms.send_sms
       redirect '/inbox'
     else
