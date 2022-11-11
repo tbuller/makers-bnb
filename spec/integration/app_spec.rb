@@ -49,21 +49,14 @@ describe Application do
       expect(response.status).to eq 302
     end
   end    
-  
-  context 'GET /booking' do 
-    it 'return to the booking form' do 
-      response = get('/booking/new')
-      expect(response.status).to eq 302
-    end 
-  end 
 
-  context 'POST /booking' do 
+  context 'POST /listing/:id' do 
     it 'posts booking form to database' do 
-      response = post('/booking', date: '2022-11-08', user_id: 1, listing_id: 1)
+      response = post('/listing/:id', date: '2023-02-02', user_id: 1, listing_id: 1)
       expect(response.status).to eq 302
       repo = BookingRepository.new
       bookings = repo.all
-      expect(bookings.last.date).to eq('2022-11-08')
+      expect(bookings.last.date).to eq('2023-02-02')
       expect(bookings.last.user_id).to eq(1)
       expect(bookings.last.listing_id).to eq(1)
     end 
