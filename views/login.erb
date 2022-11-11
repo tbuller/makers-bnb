@@ -8,9 +8,6 @@
         <link rel="stylesheet" type="text/css" href="/style.css">
     </head>
     <body>
-      <% if flash[:notice] %>
-      <div class="notice"><%= flash[:notice] %></div>
-      <% end %>
     <div class="topnav">
     <img src="/makersbnb-logo.png" class="logo" />
   
@@ -31,6 +28,9 @@
   <div class="content">
     <div class="center-field">
     <h3> Login </h3>
+     <% if flash[:notice] %>
+      <div class="notice"><strong><%= flash[:notice] %></strong></div>
+      <% end %>
     <form method="POST" action="/login">
       <div>
         <label>Email: </label>

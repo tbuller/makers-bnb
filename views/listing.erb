@@ -51,13 +51,23 @@
     <p><%= @listing.description %></p>
   </div>
 
+  <% if session[:user_id] == nil %>
+  <div>
+    <p><strong>Like the look of this property? Sign up or log in to book it.</strong></p>
+    <a href="/signup/new"><button>Sign up</button></a><a href="/login"><button>Log in</button></a>
+    </div>
+  <% else %>  
   <div>
     <h2>Check availability & book</h2>
-    <form method="POST" action="/booking">
+    <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
+    <form method="POST" action="/listing/<%= @listing.id %>">
     <input type="date" name="date">
     <input type="submit" value="Book" class="button">
     </form>
   </div>
+  <% end %>
 
 </div>
 

@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-  <% if flash[:notice] %>
-  <div class="notice"><%= flash[:notice] %></div>
-  <% end %>
+  
 <html lang="en">
 <head>
   <title>Sign up | Makersbnb</title>
@@ -30,8 +28,12 @@
 
 <div class="content">
 
+
   <h1>Sign up to Makersbnb</h1>
   <div class="center-field">
+  <% if flash[:notice] %>
+  <div class="notice"><strong><%= flash[:notice] %></strong></div>
+  <% end %>
     <form method="POST" action="/signup">
       <div>
       <label>Your name:</label>
