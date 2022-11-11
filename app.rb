@@ -5,6 +5,7 @@ require_relative './lib/listing_repository'
 require_relative './lib/database_connection'
 require_relative './lib/user_repository'
 require_relative './lib/booking_repository'
+require_relative './lib/sms'
 
 DatabaseConnection.connect
 
@@ -75,6 +76,8 @@ class Application < Sinatra::Base
     if user != nil
       if repo.valid_password?(user.password, params[:password]) == "success"
         session[:user_id] = user.id
+        session[:user_name] = user.name
+        session[:user_username] = user.username
         redirect '/'
       else
         redirect '/login'
@@ -103,6 +106,8 @@ class Application < Sinatra::Base
     if available_dates.include?(booking.date)
       booking_repo = BookingRepository.new 
       booking_repo.create(booking)
+      new_sms = SMS.new(session[:user_name])
+      new_sms.send_sms
       redirect '/inbox'
     else
       flash[:notice] = "#{booking.date} not available. Please choose another date."
