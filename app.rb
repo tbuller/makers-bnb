@@ -48,7 +48,6 @@ class Application < Sinatra::Base
 
     repo = ListingRepository.new
     repo.create(listing)
-
     redirect '/'
   end
 
@@ -81,7 +80,7 @@ class Application < Sinatra::Base
         redirect '/login'
       end    
     else 
-      redirect '/login' # you havent signed up link here?
+      redirect '/login'
     end
   end  
 
@@ -93,16 +92,22 @@ class Application < Sinatra::Base
     end
   end 
 
-  post '/booking' do 
+  post '/listing/:id' do 
     booking = Booking.new
-  
     booking.date = params[:date]
     booking.user_id = session[:user_id] ||= params[:user_id]
     booking.listing_id = session[:listing_id] ||= params[:listing_id]
     booking.approved = 'f'
-    repo = BookingRepository.new 
-    repo.create(booking)
-    redirect '/inbox'
+    listing_repo = ListingRepository.new
+    available_dates = listing_repo.give_date_range(booking.listing_id)
+    if available_dates.include?(booking.date)
+      booking_repo = BookingRepository.new 
+      booking_repo.create(booking)
+      redirect '/inbox'
+    else
+      flash[:notice] = "#{booking.date} not available. Please choose another date."
+      redirect "/listing/#{booking.listing_id}"
+    end
   end
 
   get '/inbox' do
